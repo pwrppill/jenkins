@@ -1,0 +1,7 @@
+echo -e "{\n"insecure-registries" : ["http://130.193.55.151:8123"]\n}" >> /etc/docker/daemon.json
+apt update && apt install git docker.io -y
+git clone https://github.com/pwrppill/repo.git
+docker build -t myapp:$version ./repo
+docker tag myapp:$version 130.193.55.151:8123/myapp:$version
+docker login -u admin -p admin 130.193.55.151:8123
+docker push [130.193.55.151:8123/myapp:$version]
